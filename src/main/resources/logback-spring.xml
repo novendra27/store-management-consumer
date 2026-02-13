@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!-- Property untuk path log file -->
+    <property name="LOG_PATH" value="./logs"/>
+    <property name="LOG_FILE_NAME" value="consumer-app"/>
+    
+    <!-- Pattern untuk format log - Limit stack trace to 5 lines -->
+    <property name="LOG_PATTERN" 
+              value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n%ex{5}"/>
+    
+    <!-- Pattern untuk console - lebih clean -->
+    <property name="CONSOLE_PATTERN" 
+              value="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %logger{36} - %msg%n%ex{3}"/>
+    
+    <!-- Console Appender - untuk development -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${CONSOLE_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+    
+    <!-- File Appender - Log semua level -->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH}/${LOG_FILE_NAME}.log</file>
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+        
+        <!-- Rolling policy - rotate berdasarkan ukuran dan tanggal -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!-- File pattern untuk archived logs -->
+            <fileNamePattern>${LOG_PATH}/archive/${LOG_FILE_NAME}-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <!-- Max file size sebelum rotate -->
+            <maxFileSize>10MB</maxFileSize>
+            <!-- Keep 30 days of logs -->
+            <maxHistory>30</maxHistory>
+            <!-- Total size of all archived logs -->
+            <totalSizeCap>500MB</totalSizeCap>
+        </rollingPolicy>
+    </appender>
+    
+    <!-- File Appender - Error logs only -->
+    <appender name="ERROR_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH}/${LOG_FILE_NAME}-error.log</file>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+        
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_PATH}/archive/${LOG_FILE_NAME}-error-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxFileSize>10MB</maxFileSize>
+            <maxHistory>90</maxHistory>
+            <totalSizeCap>500MB</totalSizeCap>
+        </rollingPolicy>
+    </appender>
+    
+    <!-- File Appender - Kafka logs only -->
+    <appender name="KAFKA_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH}/kafka-consumer.log</file>
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+        
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_PATH}/archive/kafka-consumer-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxFileSize>10MB</maxFileSize>
+            <maxHistory>30</maxHistory>
+            <totalSizeCap>300MB</totalSizeCap>
+        </rollingPolicy>
+    </appender>
+    
+    <!-- File Appender - Transaction logs only -->
+    <appender name="TRANSACTION_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH}/transaction.log</file>
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+        
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_PATH}/archive/transaction-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxFileSize>10MB</maxFileSize>
+            <maxHistory>30</maxHistory>
+            <totalSizeCap>300MB</totalSizeCap>
+        </rollingPolicy>
+    </appender>
+    
+    <!-- Logger untuk package aplikasi kita -->
+    <logger name="javadev.project.consumer" level="DEBUG" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE"/>
+        <appender-ref ref="ERROR_FILE"/>
+    </logger>
+    
+    <!-- Logger khusus untuk Kafka Consumer -->
+    <logger name="javadev.project.consumer.kafka" level="INFO" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="KAFKA_FILE"/>
+        <appender-ref ref="ERROR_FILE"/>
+    </logger>
+    
+    <!-- Logger khusus untuk Transaction Service -->
+    <logger name="javadev.project.consumer.service" level="INFO" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="TRANSACTION_FILE"/>
+        <appender-ref ref="ERROR_FILE"/>
+    </logger>
+    
+    <!-- Spring Framework logs - reduced verbosity -->
+    <logger name="org.springframework" level="INFO"/>
+    <logger name="org.springframework.kafka" level="WARN"/>
+    <logger name="org.apache.kafka" level="WARN"/>
+    <logger name="org.hibernate" level="INFO"/>
+    <logger name="org.hibernate.SQL" level="DEBUG"/>
+    <logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="TRACE"/>
+    
+    <!-- Root logger -->
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE"/>
+        <appender-ref ref="ERROR_FILE"/>
+    </root>
+    
+</configuration>
