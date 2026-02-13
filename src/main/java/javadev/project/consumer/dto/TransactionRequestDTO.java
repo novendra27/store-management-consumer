@@ -1,6 +1,7 @@
 package javadev.project.consumer.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,6 +20,7 @@ public class TransactionRequestDTO {
 
     @NotNull(message = "Transaction date cannot be null")
     @JsonProperty("transaction_date")
+    @JsonDeserialize(using = TransactionDateDeserializer.class)
     private String transactionDate;
 
     @NotNull(message = "Items cannot be null")
