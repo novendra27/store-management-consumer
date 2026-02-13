@@ -9,6 +9,10 @@ import org.springframework.stereotype.Repository;
 import java.math.BigDecimal;
 import java.util.List;
 
+/**
+ * Repository interface for Transaction Detail entity
+ * Provides CRUD operations and custom queries for transaction detail management
+ */
 @Repository
 public interface TransactionDetailRepository extends JpaRepository<transactionDetail, Integer> {
 

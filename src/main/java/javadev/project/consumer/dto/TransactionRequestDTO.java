@@ -12,6 +12,11 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import java.util.List;
 
+/**
+ * DTO for incoming transaction request from Kafka
+ * Contains transaction date and list of items to be sold
+ * Supports flexible date format via custom deserializer
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

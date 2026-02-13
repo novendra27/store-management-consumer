@@ -5,6 +5,11 @@ import lombok.Getter;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Custom business exception class with error code and additional details
+ * Extends RuntimeException for unchecked exception handling
+ * Supports method chaining for adding error details
+ */
 @Getter
 public class BusinessException extends RuntimeException {
 

@@ -5,6 +5,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Generic DTO class for API responses
+ * Encapsulates response message, data payload, and error details
+ * Provides static factory methods for creating success and error responses
+ *
+ * @param <T> Type of data payload
+ */
 @Data
 @Builder
 @NoArgsConstructor

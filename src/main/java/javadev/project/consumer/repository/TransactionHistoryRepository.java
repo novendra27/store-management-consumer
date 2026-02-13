@@ -7,6 +7,11 @@ import org.springframework.stereotype.Repository;
 import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * Repository interface for Transaction History entity
+ * Provides CRUD operations and custom queries for transaction history
+ * management
+ */
 @Repository
 public interface TransactionHistoryRepository extends JpaRepository<transactionHistory, Integer> {
 

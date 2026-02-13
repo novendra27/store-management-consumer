@@ -2,6 +2,11 @@ package javadev.project.consumer.exception;
 
 import lombok.Getter;
 
+/**
+ * Enumeration of business error codes
+ * Each error code has a unique code string and descriptive message
+ * Used by BusinessException for consistent error handling
+ */
 @Getter
 public enum ErrorCode {
     // Product related errors

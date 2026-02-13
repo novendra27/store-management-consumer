@@ -9,6 +9,17 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
+/**
+ * Entity class representing stock movement history
+ * Maps to the 'stock_log' table in the database
+ * Tracks all stock changes: quantity before, quantity after, and change amount
+ * 
+ * Maintains many-to-one relationship with Product entity
+ * Used for audit trail and inventory reconciliation
+ * Uses Hibernate annotation for automatic timestamp generation (created_at)
+ * Lombok annotations provide getters, setters, constructors, and builder
+ * pattern
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

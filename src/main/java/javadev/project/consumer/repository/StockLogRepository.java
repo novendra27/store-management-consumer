@@ -8,6 +8,10 @@ import org.springframework.stereotype.Repository;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * Repository interface for Stock Log entity
+ * Provides CRUD operations and custom queries for stock movement tracking
+ */
 @Repository
 public interface StockLogRepository extends JpaRepository<stockLog, Integer> {
 

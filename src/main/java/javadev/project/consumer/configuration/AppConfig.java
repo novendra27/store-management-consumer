@@ -15,6 +15,11 @@ import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Application configuration class
+ * Configures Spring beans for Kafka consumer, JSON processing, and application
+ * settings
+ */
 @Configuration
 @EnableKafka
 public class AppConfig {
@@ -28,6 +33,12 @@ public class AppConfig {
     @Value("${spring.kafka.consumer.auto-offset-reset}")
     private String autoOffsetReset;
 
+    /**
+     * Configure ObjectMapper bean for JSON processing
+     * Registers JavaTimeModule to support Java 8 date/time types
+     *
+     * @return Configured ObjectMapper instance
+     */
     @Bean
     public ObjectMapper objectMapper() {
         ObjectMapper mapper = new ObjectMapper();
@@ -35,6 +46,12 @@ public class AppConfig {
         return mapper;
     }
 
+    /**
+     * Configure Kafka consumer factory with connection settings
+     * Sets up bootstrap servers, group ID, deserializers, and consumer properties
+     *
+     * @return ConsumerFactory configured for String key and value
+     */
     @Bean
     public ConsumerFactory<String, String> consumerFactory() {
         Map<String, Object> props = new HashMap<>();
@@ -47,6 +64,14 @@ public class AppConfig {
         return new DefaultKafkaConsumerFactory<>(props);
     }
 
+    /**
+     * Configure Kafka listener container factory
+     * This factory is used by @KafkaListener annotations to create message listener
+     * containers
+     *
+     * @return ConcurrentKafkaListenerContainerFactory for concurrent message
+     *         processing
+     */
     @Bean
     public ConcurrentKafkaListenerContainerFactory<String, String> kafkaListenerContainerFactory() {
         ConcurrentKafkaListenerContainerFactory<String, String> factory = new ConcurrentKafkaListenerContainerFactory<>();

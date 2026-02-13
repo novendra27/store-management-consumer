@@ -11,6 +11,18 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * Entity class representing a product category
+ * Maps to the 'category' table in the database
+ * Used to organize products into logical groups (e.g., Electronics, Clothing,
+ * Food)
+ * 
+ * Maintains bidirectional relationship with Product entity
+ * Uses Hibernate annotations for automatic timestamp generation (created_at,
+ * updated_at)
+ * Lombok annotations provide getters, setters, constructors, and builder
+ * pattern
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

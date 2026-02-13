@@ -9,13 +9,30 @@ import java.io.IOException;
 import java.time.LocalDate;
 
 /**
- * Custom deserializer for transaction_date field
- * Handles both formats:
- * - Array format: [2026, 2, 13]
- * - String format: "2026-02-13"
+ * Custom JSON deserializer for flexible transaction date parsing
+ * Supports two date formats from Kafka messages:
+ * 1. Array format: [2026, 2, 13] - year, month, day as separate integers
+ * 2. String format: "2026-02-13" - ISO date string (yyyy-MM-dd)
+ * 
+ * Validates date components to ensure reasonable values:
+ * - Year: 1900-2100
+ * - Month: 1-12
+ * - Day: 1-31
+ * 
+ * Converts both formats to standard yyyy-MM-dd string format
+ * Throws IOException if date format is invalid or unrecognized
  */
 public class TransactionDateDeserializer extends JsonDeserializer<String> {
 
+    /**
+     * Deserialize JSON date value to yyyy-MM-dd string format
+     * 
+     * @param p    JsonParser providing access to JSON content
+     * @param ctxt Deserialization context
+     * @return Date string in yyyy-MM-dd format
+     * @throws IOException if date format is invalid or values are out of valid
+     *                     range
+     */
     @Override
     public String deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
         JsonNode node = p.getCodec().readTree(p);

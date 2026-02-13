@@ -11,6 +11,11 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.stream.Collectors;
 
+/**
+ * Global exception handler for REST controllers
+ * Catches and handles all exceptions thrown by the application
+ * Converts exceptions to appropriate HTTP responses with error details
+ */
 @RestControllerAdvice
 @Slf4j
 public class GlobalExceptionHandler {
@@ -68,7 +73,11 @@ public class GlobalExceptionHandler {
     }
 
     /**
-     * Determine appropriate HTTP status based on error code
+     * Determine appropriate HTTP status code based on business error code
+     * Maps different error types to corresponding HTTP status codes
+     *
+     * @param errorCode Business error code enum
+     * @return Appropriate HttpStatus for the error type
      */
     private HttpStatus determineHttpStatus(ErrorCode errorCode) {
         return switch (errorCode) {

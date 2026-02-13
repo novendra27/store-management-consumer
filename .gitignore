@@ -33,5 +33,9 @@ build/
 .vscode/
 context.md
 
+### Logs ###
+logs/*.log
+logs/archive/
+
 ## Application Properties ###
 src/main/resources/application.properties

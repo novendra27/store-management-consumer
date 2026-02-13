@@ -12,6 +12,17 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * Entity class representing a product in the inventory system
+ * Maps to the 'product' table in the database
+ * Contains product information, pricing, stock levels, and relationships to
+ * category and supplier
+ * 
+ * Uses Hibernate annotations for automatic timestamp generation (created_at,
+ * updated_at)
+ * Lombok annotations provide getters, setters, constructors, and builder
+ * pattern
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

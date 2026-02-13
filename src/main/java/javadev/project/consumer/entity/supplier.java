@@ -11,6 +11,17 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * Entity class representing a supplier/vendor
+ * Maps to the 'supplier' table in the database
+ * Contains supplier contact information and business details
+ * 
+ * Maintains bidirectional relationship with Product entity
+ * Uses Hibernate annotations for automatic timestamp generation (created_at,
+ * updated_at)
+ * Lombok annotations provide getters, setters, constructors, and builder
+ * pattern
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

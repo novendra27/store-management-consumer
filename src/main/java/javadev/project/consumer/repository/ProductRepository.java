@@ -6,6 +6,10 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
+/**
+ * Repository interface for Product entity
+ * Provides CRUD operations and custom queries for product management
+ */
 @Repository
 public interface ProductRepository extends JpaRepository<product, Integer> {
 

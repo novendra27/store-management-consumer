@@ -10,6 +10,19 @@ import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+/**
+ * Entity class representing individual line items in a sales transaction
+ * Maps to the 'transaction_detail' table in the database
+ * Contains product information, quantity, unit price, and total price for each
+ * item
+ * 
+ * Maintains many-to-one relationships with TransactionHistory and Product
+ * entities
+ * Total price is calculated as quantity × unit price
+ * Uses Hibernate annotation for automatic timestamp generation (created_at)
+ * Lombok annotations provide getters, setters, constructors, and builder
+ * pattern
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

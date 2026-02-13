@@ -10,6 +10,12 @@ import lombok.NoArgsConstructor;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 
+/**
+ * DTO for individual transaction item
+ * Contains product ID and quantity for a single line item in the transaction
+ * Supports both camelCase (productId) and snake_case (product_id) JSON field
+ * names
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

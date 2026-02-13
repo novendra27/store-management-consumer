@@ -12,6 +12,17 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * Entity class representing a sales transaction header
+ * Maps to the 'transaction_history' table in the database
+ * Contains transaction-level information: date, total price, and status
+ * 
+ * Maintains one-to-many relationship with TransactionDetail entity
+ * Total price is calculated as sum of all transaction detail prices
+ * Uses Hibernate annotation for automatic timestamp generation (created_at)
+ * Lombok annotations provide getters, setters, constructors, and builder
+ * pattern
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
